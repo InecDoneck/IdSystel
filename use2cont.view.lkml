@@ -4,8 +4,7 @@ view: use2cont {
         event_timestamp as eventtyme,
         a_videostopwatchvideoid as contentid
 from event where event_type = 'VideoStopWatchEvent'
-limit 10
- ;;
+;;
   }
 
   measure: count {
