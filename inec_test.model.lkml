@@ -13,3 +13,7 @@ explore: event {}
 explore: event_staging {}
 
 explore: old_event_table {}
+
+explore: client_dist {}
+
+explore: use2cont {}
