@@ -4,7 +4,7 @@ view: get_view_video {
        a_videostopwatchvideoname as videoname,
        a_videostopwatchvideodescription as videodescr,
        a_videostopwatchwatcherusername as descr,
-       null as sess_id,
+       '' as sess_id,
        session_start_timestamp as sessiontime,
        trunc((random() * 999)+1) as videoviewlength,
          client_cognito_id as watcher,
