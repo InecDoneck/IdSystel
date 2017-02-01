@@ -1,9 +1,10 @@
 view: get_view_video {
   derived_table: {
-    sql: select a_videostopwatchvideoid as content_id,
-       a_videostopwatchvideoname as videoname,
-       a_videostopwatchvideodescription as videodescr,
-       a_videostopwatchwatcherusername as descr,
+    sql: select
+       a_videostopwatchvideoid as content_id,
+       coalesce(a_videostopwatchvideoname, '-') as videoname,
+       coalesce(a_videostopwatchvideodescription, '-') as videodescr,
+       coalesce(a_videostopwatchwatcherusername, '-') as descr,
        '' as sess_id,
        session_start_timestamp as sessiontime,
        trunc((random() * 999)+1) as videoviewlength,
