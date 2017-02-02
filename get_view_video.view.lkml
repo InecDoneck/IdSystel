@@ -2,7 +2,7 @@ view: get_view_video {
   derived_table: {
     sql: select
        a_videostopwatchvideoid as content_id,
-       coalesce(a_videostopwatchvideoname ||''''|| 'd', '-') as videoname,
+       coalesce(a_videostopwatchvideoname, '-') as videoname,
        coalesce(a_videostopwatchvideodescription, '-') as videodescr,
        coalesce(a_videostopwatchwatcherusername, '-') as descr,
        '' as sess_id,
