@@ -19,8 +19,7 @@ view: get_view_video {
 from awsma.event
 where event_type = 'VideoStopWatchEvent'
 and a_videostopwatchvideocreatorid is not null
-order by arrival_timestamp, clientowner_id,  a_videostopwatchwatcheridentityid
- ;;
+;;
   }
 
   measure: count {
