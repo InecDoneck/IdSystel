@@ -72,6 +72,11 @@ order by arrival_timestamp, clientowner_id,  a_videostopwatchwatcheridentityid
     sql: ${TABLE}.clientowner_id ;;
   }
 
+  dimension: clientname {
+    type: string
+    sql: ${TABLE}.clientname ;;
+  }
+
   set: detail {
     fields: [
       content_id,
@@ -82,7 +87,8 @@ order by arrival_timestamp, clientowner_id,  a_videostopwatchwatcheridentityid
       sessiontime_time,
       videoviewlength,
       watcher,
-      clientowner_id
+      clientowner_id,
+      clientname
     ]
   }
 }

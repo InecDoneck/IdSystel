@@ -1,6 +1,6 @@
 view: client_dist {
   derived_table: {
-    sql: select distinct client_cognito_id as cognitoid  from event where event_type = 'VideoStopWatchEvent'
+    sql: select arrival_timestamp as sessiontime  from awsma.event where event_type = 'VideoStopWatchEvent'
       ;;
   }
 
@@ -9,12 +9,12 @@ view: client_dist {
     drill_fields: [detail*]
   }
 
-  dimension: cognitoid {
+  dimension: sessiontime {
     type: string
-    sql: ${TABLE}.cognitoid ;;
+    sql: ${TABLE}.sessiontime ;;
   }
 
   set: detail {
-    fields: [cognitoid]
+    fields: [sessiontime]
   }
 }
