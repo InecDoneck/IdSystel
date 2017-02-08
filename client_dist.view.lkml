@@ -1,6 +1,6 @@
 view: client_dist {
   derived_table: {
-    sql: select arrival_timestamp as sessiontime  from awsma.event where event_type = 'VideoStopWatchEvent'
+    sql: select arrival_timestamp as sessiontime, date_part(epoch, arrival_timestamp) as secondfrom70  from awsma.event where event_type = 'VideoStopWatchEvent'
       ;;
   }
 
@@ -14,12 +14,17 @@ view: client_dist {
     sql: ${TABLE}.sessiontime ;;
   }
 
+  dimension: secondfrom70 {
+    type: number
+    sql: ${TABLE}.secondfrom70 ;;
+  }
+
   dimension_group: sessiontime {
     type: time
     sql: ${TABLE}.sessiontime ;;
   }
 
   set: detail {
-    fields: [sessiontime]
+    fields: [sessiontime, secondfrom70]
   }
 }
