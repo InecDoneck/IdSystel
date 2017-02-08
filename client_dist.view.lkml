@@ -14,6 +14,11 @@ view: client_dist {
     sql: ${TABLE}.sessiontime ;;
   }
 
+  dimension_group: sessiontime {
+    type: time
+    sql: ${TABLE}.sessiontime ;;
+  }
+
   set: detail {
     fields: [sessiontime]
   }
