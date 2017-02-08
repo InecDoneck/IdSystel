@@ -10,7 +10,7 @@ view: client_dist {
   }
 
   dimension: sessiontime {
-    type: date
+    type: date_millisecond125
     sql: ${TABLE}.sessiontime ;;
   }
 
