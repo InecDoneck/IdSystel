@@ -7,6 +7,7 @@ view: get_view_video {
        coalesce(a_videostopwatchwatcherusername, '-') as descr,
        '' as sess_id,
        arrival_timestamp as sessiontime,
+      date_part(epoch, arrival_timestamp) as secondfrom70,
       case when coalesce(m_videostopwatchplaybackstoppedtime, 0) <= 0 then
            m_videostopwatchvideolength - coalesce(m_videostopwatchplaybackstartedtime, 0)
        else
@@ -57,6 +58,11 @@ order by arrival_timestamp, clientowner_id,  a_videostopwatchwatcheridentityid
     sql: ${TABLE}.sessiontime ;;
   }
 
+  dimension: secondfrom70 {
+    type: number
+    sql: ${TABLE}.secondfrom70 ;;
+  }
+
   dimension: videoviewlength {
     type: number
     sql: ${TABLE}.videoviewlength ;;
@@ -85,6 +91,7 @@ order by arrival_timestamp, clientowner_id,  a_videostopwatchwatcheridentityid
       descr,
       sess_id,
       sessiontime_time,
+      secondfrom70,
       videoviewlength,
       watcher,
       clientowner_id,
