@@ -6,13 +6,19 @@ view: get_view_video {
        coalesce(a_videostopwatchvideodescription, '-') as videodescr,
        coalesce(a_videostopwatchwatcherusername, '-') as descr,
        '' as sess_id,
-       session_start_timestamp as sessiontime,
-       trunc((random() * 999)+1) as videoviewlength,
-         client_cognito_id as watcher,
-         application_version_name as clientowner_id
-from event
+       arrival_timestamp as sessiontime,
+      case when coalesce(m_videostopwatchplaybackstoppedtime, 0) <= 0 then
+           m_videostopwatchvideolength - coalesce(m_videostopwatchplaybackstartedtime, 0)
+       else
+           m_videostopwatchplaybackstoppedtime - coalesce(m_videostopwatchplaybackstartedtime, 0)
+       end as videoviewlength,
+         a_videostopwatchwatcheridentityid as watcher,
+         a_videostopwatchvideocreatorid as clientowner_id,
+         coalesce(a_videostopwatchwatcherusername, '-') as clientname
+from awsma.event
 where event_type = 'VideoStopWatchEvent'
-order by clientowner_id,  client_cognito_id
+and a_videostopwatchvideocreatorid is not null
+order by arrival_timestamp, clientowner_id,  a_videostopwatchwatcheridentityid
  ;;
   }
 
