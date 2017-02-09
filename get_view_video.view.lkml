@@ -19,6 +19,7 @@ view: get_view_video {
 from awsma.event
 where event_type = 'VideoStopWatchEvent'
 and a_videostopwatchvideocreatorid is not null
+and a_videostopwatchvideocreatorid <> a_videostopwatchwatcheridentityid
 ;;
   }
 
