@@ -15,7 +15,10 @@ view: get_view_video {
        end as videoviewlength,
          a_videostopwatchwatcheridentityid as watcher,
          a_videostopwatchvideocreatorid as clientowner_id,
-         coalesce(a_videostopwatchwatcherusername, '-') as clientname
+         coalesce(a_videostopwatchwatcherusername, '-') as clientname,
+         event_timestamp as eventtime,
+         session_start_timestamp as startsession,
+         session_id as session_id
 from awsma.event
 where event_type = 'VideoStopWatchEvent'
 and a_videostopwatchvideocreatorid is not null
@@ -81,6 +84,21 @@ and a_videostopwatchvideocreatorid <> a_videostopwatchwatcheridentityid
   dimension: clientname {
     type: string
     sql: ${TABLE}.clientname ;;
+  }
+
+  dimension: eventtime {
+    type: date_millisecond125
+    sql: ${TABLE}.eventtime ;;
+  }
+
+  dimension: startsession {
+    type: date_millisecond125
+    sql: ${TABLE}.startsession ;;
+  }
+
+  dimension: session_id {
+    type: string
+    sql: ${TABLE}.session_id ;;
   }
 
   set: detail {
