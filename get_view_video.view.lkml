@@ -1,6 +1,21 @@
 view: get_view_video {
   derived_table: {
-    sql: select
+    sql: select view_event.content_id,
+        view_event.videoname,
+        view_event.videodescr,
+        view_event.descr,
+        view_event.sess_id,
+        view_event.sessiontime_time,
+        view_event.secondfrom70,
+        view_event.videoviewlength,
+        view_event.watcher,
+        view_event.clientowner_id,
+        view_event.clientname,
+        view_event.eventtime,
+        view_event.startsession,
+        view_event.session_id
+    from
+      (select
        a_videostopwatchvideoid as content_id,
        coalesce(a_videostopwatchvideoname, '-') as videoname,
        coalesce(a_videostopwatchvideodescription, '-') as videodescr,
@@ -23,6 +38,8 @@ from awsma.event
 where event_type = 'VideoStopWatchEvent'
 and a_videostopwatchvideocreatorid is not null
 and a_videostopwatchvideocreatorid <> a_videostopwatchwatcheridentityid
+) as view_event
+where view_event.videoviewlength > 0
 ;;
   }
 
