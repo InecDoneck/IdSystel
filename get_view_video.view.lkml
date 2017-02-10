@@ -5,7 +5,7 @@ view: get_view_video {
         view_event.videodescr,
         view_event.descr,
         view_event.sess_id,
-        view_event.sessiontime_time,
+        view_event.sessiontime,
         view_event.secondfrom70,
         view_event.videoviewlength,
         view_event.watcher,
