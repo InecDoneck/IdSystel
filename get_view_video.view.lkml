@@ -113,7 +113,10 @@ and a_videostopwatchvideocreatorid <> a_videostopwatchwatcheridentityid
       videoviewlength,
       watcher,
       clientowner_id,
-      clientname
+      clientname,
+      eventtime,
+      startsession,
+      session_id
     ]
   }
 }
