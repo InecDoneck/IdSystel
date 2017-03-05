@@ -132,8 +132,8 @@ where view_event.videoviewlength > 0
       clientowner_id,
       clientname,
       eventtime,
-      startsession,
-      session_id
+      session_id,
+      startsession
     ]
   }
 }
