@@ -1,21 +1,192 @@
-connection: "redshift"
+view: client_dist3 {
+  derived_table: {
+    sql: SELECT
+  nclient_id,
+  client_cognito_id,
+  dlastupdate,
+  vusername,
+  vpassword,
+  vemail,
+  vphone,
+  vpersonorcorp,
+  vbusinesslegalname,
+  vbusinessemail,
+  vbusinessphone,
+  vcontactperson,
+  vnotetobdm,
+  vstate,
+  vstatus,
+  vstatuschangedate,
+  vfullnamedisplay,
+  vfirstname,
+  vmiddleinitial,
+  vlastname,
+  vpaymmethod,
+  vstreetaddressbill,
+  vcitybill,
+  vstatebill,
+  vzipbill,
+  vcurrency,
+  vcountrybill,
+  vdateofbirth,
+  vstreetaddressmail,
+  vcitym,
+  vstatem,
+  vzipm,
+  vcountrym,
+  vssn,
+  vbankname,
+  vbankaddress,
+  vaccountnumber,
+  vroutingnumber,
+  vaccounttype,
+  vcctoken,
+  vbusinesscategory,
+  vsubcategory,
+  vnaics,
+  vownershiptype,
+  vbusinessnamedba,
+  vbrandname,
+  vtin,
+  vwebsite,
+  vstreetaddresbusiness,
+  vcitybusiness,
+  vstatebusiness,
+  vzipbusiness,
+  vcountrybusiness,
+  vyearsinbusiness,
+  vmmyybusinessestablished,
+  vgovrnissuedid1type,
+  vgovrnissuedid1num,
+  vgovrnissueidid1issdate,
+  vgovrnissuedid1expirdate,
+  vgovrnissuedid2type,
+  vgovrnissuedid2num,
+  vgovrnissuedid2issdate,
+  vgovrnissuedid2expirdate,
+  vprincipalname1,
+  vprincipalssn1,
+  vprincipal1dob,
+  vprincipal1address,
+  vowner1,
+  vprocentownership1,
+  vprincipalname2,
+  vprincipalssn2,
+  vprincipal2dob,
+  vprincipal2address,
+  vowner2,
+  vprocentownership2,
+  vprincipalname3,
+  vprincipalssn3,
+  vprincipal3dob,
+  vprincipal3address,
+  vowner3,
+  vprocentownership3,
+  vprincipalname4,
+  vprincipalssn4,
+  vprincipal4dob,
+  vprincipal4address,
+  vowner4,
+  vprocentownership4,
+  vprincipalname5,
+  vprincipalssn5,
+  vprincipal5dob,
+  vprincipal5address,
+  vowner5,
+  vprocentownership5,
+  vgovrnissuedid1typeprincip1,
+  vgovrnissuedid1numprincip1,
+  vgovrnissuedid1issdatprincip1,
+  vgovrnissuedid1expdatprincip1,
+  vgovrnissuedid2typeprincip1,
+  vgovrnissuedid2numprincip1,
+  vgovrnissuedid2issdatprincip1,
+  vgovrnissuedid2expdatprincip1,
+  vgovrnissuedid1typeprincip2,
+  vgovrnissuedid1numprincip2,
+  vgovrnissuedid1issdatprincip2,
+  vgovrnissuedid1expdatprincip2,
+  vgovrnissuedid2typeprincip2,
+  vgovrnissuedid2numprincip2,
+  vgovrnissuedid2issdatprincip2,
+  vgovrnissuedid2expdatprincip2,
+  vgovrnissuedid1typeprincip3,
+  vgovrnissuedid1numprincip3,
+  vgovrnissuedid1issdatprincip3,
+  vgovrnissuedid1expdatprincip3,
+  vgovrnissuedid2typeprincip3,
+  vgovrnissuedid2numprincip3,
+  vgovrnissuedid2issdatprincip3,
+  vgovrnissuedid2expdatprincip3,
+  vgovrnissuedid1typeprincip4,
+  vgovrnissuedid1numprincip4,
+  vgovrnissuedid1issdatprincip4,
+  vgovrnissuedid1expdatprincip4,
+  vgovrnissuedid2typeprincip4,
+  vgovrnissuedid2numprincip4,
+  vgovrnissuedid2issdatprincip4,
+  vgovrnissuedid2expdatprincip4,
+  vgovrnissuedid1typeprincip5,
+  vgovrnissuedid1numprincip5,
+  vgovrnissuedid1issdatprincip5,
+  vgovrnissuedid1expdatprincip5,
+  vgovrnissuedid2typeprincip5,
+  vgovrnissuedid2numprincip5,
+  vgovrnissuedid2issdatprincip5,
+  vgovrnissuedid2expdatprincip5,
+  vriskrating,
+  vkycregistrationcheck,
+  vkycofac,
+  vkycofaccheckprincip1,
+  vkycofaccheckprincip2,
+  vkycofaccheckprincip3,
+  vkycofaccheckprincip4,
+  vkycofaccheckprincip5,
+  vkycmatch,
+  vkycmatchcheckprincip1,
+  vkycmatchcheckprincip2,
+  vkycmatchcheckprincip3,
+  vkycmatchcheckprincip4,
+  vkycmatchcheckprincip5,
+  vkycothercheck,
+  vkycothercheckprincip1,
+  vkycothercheckprincip2,
+  vkycothercheckprincip3,
+  vkycothercheckprincip4,
+  vkycothercheckprincip5
+FROM
+  billing.clients ;;
+  }
 
-# include all the views
-include: "*.view"
+  measure: count {
+    type: count
+    drill_fields: [detail*]
+  }
 
-# include all the dashboards
-include: "*.dashboard"
+  dimension: sessiontime {
+    type: date_millisecond125
+    sql: ${TABLE}.sessiontime ;;
+  }
 
-explore: client_dist {
-  cancel_grouping_fields: [
-    client_dist.nclient_id,
+  dimension: secondfrom70 {
+    type: number
+    sql: ${TABLE}.secondfrom70 ;;
+  }
+
+  dimension_group: sessiontime {
+    type: time
+    sql: ${TABLE}.sessiontime ;;
+  }
+
+  set: detail {
+    fields: [client_dist.nclient_id,
   client_dist.client_cognito_id,
   client_dist.dlastupdate,
   client_dist.vusername,
   client_dist.vpassword,
   client_dist.vemail,
   client_dist.vphone,
-  client_dist.vpersonorcorp,
+    client_dist.vpersonorcorp,
   client_dist.vbusinesslegalname,
   client_dist.vbusinessemail,
   client_dist.vbusinessphone,
@@ -160,42 +331,6 @@ explore: client_dist {
   client_dist.vkycothercheckprincip2,
   client_dist.vkycothercheckprincip3,
   client_dist.vkycothercheckprincip4,
-  client_dist.vkycothercheckprincip5
-  ]
-}
-
-explore: get_view_video {
-  cancel_grouping_fields: [get_view_video.content_id,
-    get_view_video.videoname,
-    get_view_video.videodescr,
-    get_view_video.descr,
-    get_view_video.sess_id,
-    get_view_video.sessiontime_time,
-    get_view_video.secondfrom70,
-    get_view_video.videoviewlength,
-    get_view_video.watcher,
-    get_view_video.clientowner_id,
-    get_view_video.clientname,
-    get_view_video.eventtime,
-    get_view_video.startsession,
-    get_view_video.session_id
-  ]
-}
-
-explore: get_view_video_test {
-  cancel_grouping_fields: [get_view_video_test.content_id,
-    get_view_video_test.videoname,
-    get_view_video_test.videodescr,
-    get_view_video_test.descr,
-    get_view_video_test.sess_id,
-    get_view_video_test.sessiontime_time,
-    get_view_video_test.secondfrom70,
-    get_view_video_test.videoviewlength,
-    get_view_video_test.watcher,
-    get_view_video_test.clientowner_id,
-    get_view_video_test.clientname,
-    get_view_video_test.eventtime,
-    get_view_video_test.startsession,
-    get_view_video_test.session_id
-  ]
+  client_dist.vkycothercheckprincip5]
+  }
 }
