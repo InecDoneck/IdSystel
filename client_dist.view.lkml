@@ -155,7 +155,7 @@ view: client_dist {
         vkycothercheckprincip4,
         vkycothercheckprincip5
       FROM
-        billing.clients limit 2
+        billing.clients
        ;;
   }
 
