@@ -7,8 +7,7 @@ include: "*.view"
 include: "*.dashboard"
 
 explore: client_dist {
-  cancel_grouping_fields: [
-    client_dist.nclient_id,
+  cancel_grouping_fields: [client_dist.nclient_id,
   client_dist.client_cognito_id,
   client_dist.dlastupdate,
   client_dist.vusername,
