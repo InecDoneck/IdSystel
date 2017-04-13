@@ -13,7 +13,8 @@ view: get_view_video {
         view_event.clientname,
         view_event.eventtime,
         view_event.startsession,
-        view_event.session_id
+        view_event.session_id,
+        view_event.referal_id
     from
       (select
        a_videostopwatchvideoid as content_id,
@@ -33,8 +34,9 @@ view: get_view_video {
          coalesce(a_videostopwatchwatcherusername, '-') as clientname,
          event_timestamp as eventtime,
          session_start_timestamp as startsession,
-         session_id as session_id
-from billing.post_event--awsma.event
+         session_id as session_id,
+        coalesce(a_videostopwatchreferralid, 'zero') as referal_id
+from awsma.event --billing.post_event
 where event_type = 'VideoStopWatchEvent'
 and a_videostopwatchvideocreatorid is not null
 and a_videostopwatchvideocreatorid <> a_videostopwatchwatcheridentityid
@@ -118,6 +120,11 @@ where view_event.videoviewlength > 0
     sql: ${TABLE}.session_id ;;
   }
 
+  dimension: referal_id {
+    type: string
+    sql: ${TABLE}.referal_id ;;
+  }
+
   set: detail {
     fields: [
       content_id,
@@ -133,7 +140,8 @@ where view_event.videoviewlength > 0
       clientname,
       eventtime,
       session_id,
-      startsession
+      startsession,
+      referal_id
     ]
   }
 }

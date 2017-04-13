@@ -6,6 +6,8 @@ include: "*.view"
 # include all the dashboards
 include: "*.dashboard"
 
+explore: client_content{}
+
 explore: client_dist {
   cancel_grouping_fields: [client_dist.nclient_id,
   client_dist.client_cognito_id,
@@ -177,7 +179,8 @@ explore: get_view_video {
     get_view_video.clientname,
     get_view_video.eventtime,
     get_view_video.startsession,
-    get_view_video.session_id
+    get_view_video.session_id,
+    get_view_video.referal_id
   ]
 }
 
